@@ -4,7 +4,8 @@ from xor import convert_to_binary
 inputs = []
 
 with open("lap_2_input.txt", "r") as f:
-    inputs = f.read().split("\n")
+    inputs = f.read().split("\n")[:-1]
+print(inputs)
 inputs = [[int(i) for i in inputs[j].split(",")] for j in range(len(inputs))]
 results = []
 
