@@ -26,21 +26,24 @@ results.append(result)
 
 #ex3
 base, expo, mod = inputs[2]
-bin_expo = convert_to_binary(expo)
+def fast_expo(base, expo, mod):
+    bin_expo = convert_to_binary(expo)
 
-r = base 
-print(bin_expo)
-for i in range(len(bin_expo) - 2, -1, -1):
-    r = (r*r) % mod
-    if bin_expo[i] == 1:
-        r = (r * base) % mod
+    r = base 
+    for i in range(len(bin_expo) - 2, -1, -1):
+        r = (r*r) % mod
+        if bin_expo[i] == 1:
+            r = (r * base) % mod
+    return r
+r = fast_expo(base, expo, mod)
 results.append([r])
+print(r)
 
 with open("LeAnhQuang_22BI13380.txt", 'w') as f:
     for i in range(len(results)):
         output = results[i][0]
         if i == 1:
             output = results[i]
-        f.write(f"#1: result is {output}")
+        f.write(f"#{i}: result is {output}")
         f.write('\n')
 
