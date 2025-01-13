@@ -46,12 +46,15 @@ def RSA_encryption(p, q, e, M):
    c = pow(M, e, n)
    return c
 
-def RSA_decryption(p, q, e, C):
+def RSA_decryption(p, q, d, C, e = 0):
    n = p * q
    phi = (p - 1) * (q - 1)
-   if gcd(e, phi) != 1 and 1 < e and e < phi:
-      return 
-   d = pow(e, -1, phi)
+   if d == 0:
+      if gcd(e, phi) != 1 and 1 < e and e < phi:
+         return 
+      d = pow(e, -1, phi)
+      print(phi)
+   print(d)
    m = pow(C, d, n)
    return m
 input_3_1 = [int(i) for i in inputs[2].split(" ")]
@@ -65,9 +68,10 @@ results.append((c, m))
 
 input_4 = [int(i) for i in inputs[4].split(" ")]
 
-plain_text_integer = RSA_decryption(input_4[1], input_4[2], input_4[3], input_4[0])
+plain_text_integer = RSA_decryption(input_4[1], input_4[2], 0, input_4[0], input_4[3])
 results.append(convert_integer_to_string(plain_text_integer))
 
+print(results)
 with open("LeAnhQuang_22BI13380.txt", 'w') as f:
     for i in range(len(results)):
         output = results[i]
